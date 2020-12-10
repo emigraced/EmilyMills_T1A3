@@ -70,3 +70,8 @@ You must include:
 
 
 #### Attribution 
+
+- Terminal Apps the Easy Way  
+https://ttytoolkit.org/
+- Are you making a CLI app? Use TTY::Prompt!  
+https://medium.com/@ms.hernandeza1/are-you-making-a-cli-app-use-tty-prompt-2d483bd8823b#:~:text=You%20will%20first%20need%20add,new
