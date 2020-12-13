@@ -22,3 +22,9 @@
   :gender: male
   :life_stage: child
   :trait: friendly
+---
+:id:
+  :name: Emma
+  :gender: female
+  :life_stage: elder
+  :trait: friendly

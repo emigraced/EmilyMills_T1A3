@@ -23,9 +23,9 @@ end
 def read_sim_library
 log = File.open("../data/database.yml")
 saved_sims_options = []
-YAML::load_stream( log ) {|doc| 
+YAML::load_stream(log) do |doc| 
 saved_sims_options << "#{doc[:id][:name]}"
-}
+end
 return saved_sims_options
 end
 
@@ -67,7 +67,7 @@ when home_menu_options[0]
     input_name = gets.strip
     save_created_sim(input_name, input_gender, input_life_stage, input_trait)
 when home_menu_options[1]
-    if sim_library.nil? #not working
+    if sim_library == false
         puts "Oops! You haven't created any Sims yet. Please make a different selection."
     else
     select_sim = prompt.select("Which Sim would you like to play?", read_sim_library)
