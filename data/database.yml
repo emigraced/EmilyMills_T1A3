@@ -1,0 +1,18 @@
+---
+:id:
+  :name: Josh
+  :gender: male
+  :life_stage: adult
+  :trait: friendly
+---
+:id:
+  :name: Emily
+  :gender: female
+  :life_stage: adult
+  :trait: friendly
+---
+:id:
+  :name: Nora
+  :gender: female
+  :life_stage: baby
+  :trait: friendly
