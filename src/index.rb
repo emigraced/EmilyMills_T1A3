@@ -1,9 +1,11 @@
 #required
-require "tty-prompt"
 require "yaml"
+require "tty-prompt"
+require "pastel"
 
-#tty prompt
+#tty inits
 prompt = TTY::Prompt.new(symbols: {marker: "♦"})
+pastel = Pastel.new
 
 #ascii "The Sims" title
 def ascii_title
@@ -21,7 +23,7 @@ end
 
 #selecting from saved sims
 def read_sim_library
-log = File.open("../data/database.yml")
+log = File.read("../data/database.yml")
 saved_sims_options = []
 YAML::load_stream(log) do |doc| 
 saved_sims_options << "#{doc[:id][:name]}"
@@ -29,12 +31,11 @@ end
 return saved_sims_options
 end
 
-#vars for the menu
-home_menu_options = ["Create a Sim!", "Continue playing", "Read the instructions", "Exit"]
+#variables for the menu
+home_menu_options = ["Create a Sim!", "Load saved Sims", "Read the instructions", "Exit"]
 gender_options = ["female", "male"]
 life_stage_options = ["baby", "child", "adult", "elder"]
 trait_options = ["friendly", "mean"]
-sim_library = YAML.load(File.read("../data/database.yml"))
 
 #menu
 puts ascii_title
@@ -67,8 +68,10 @@ when home_menu_options[0]
     input_name = gets.strip
     save_created_sim(input_name, input_gender, input_life_stage, input_trait)
 when home_menu_options[1]
+    sim_library = YAML.load(File.read("../data/database.yml"))
     if sim_library == false
-        puts "Oops! You haven't created any Sims yet. Please make a different selection."
+        puts pastel.bright_yellow("Oops! You haven't created any Sims yet. Please make a different selection.")
+        puts pastel.yellow("(If you created your first Sim during this session, please exit and re-launch the app.)")
     else
     select_sim = prompt.select("Which Sim would you like to play?", read_sim_library)
     end
