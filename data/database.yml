@@ -16,3 +16,9 @@
   :gender: female
   :life_stage: baby
   :trait: friendly
+---
+:id:
+  :name: Nolan
+  :gender: male
+  :life_stage: child
+  :trait: friendly
