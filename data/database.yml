@@ -10,3 +10,9 @@
   :gender: male
   :life_stage: elder
   :trait: mean
+---
+:id:
+  :name: Josh
+  :gender: male
+  :life_stage: adult
+  :trait: friendly

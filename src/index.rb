@@ -2,6 +2,7 @@
 require "yaml"
 require "tty-prompt"
 require "pastel"
+require "tty-spinner"
 
 #tty inits
 prompt = TTY::Prompt.new(symbols: {marker: "♦"})
@@ -32,7 +33,7 @@ return saved_sims_options
 end
 
 #variables for the menu
-home_menu_options = ["Create a Sim!", "Load saved Sims", "Read the instructions", "Exit"]
+home_menu_options = ["Create a Sim!", "Choose a Sim to play", "Read the instructions", "Exit"]
 gender_options = ["female", "male"]
 life_stage_options = ["baby", "child", "adult", "elder"]
 trait_options = ["friendly", "mean"]
@@ -65,15 +66,14 @@ when home_menu_options[0]
     end
     sleep(0.5)
     puts "Finally, give your Sim a first name:"
-    input_name = gets.strip
+    input_name = gets.strip.capitalize
     save_created_sim(input_name, input_gender, input_life_stage, input_trait)
 when home_menu_options[1]
     sim_library = YAML.load(File.read("../data/database.yml"))
     if sim_library == false
         puts pastel.bright_yellow("Oops! You haven't created any Sims yet. Please make a different selection.")
-        puts pastel.yellow("(If you created your first Sim during this session, please exit and re-launch the app.)")
     else
-    select_sim = prompt.select("Which Sim would you like to play?", read_sim_library)
+    select_sim = prompt.select("Please select a Sim", read_sim_library)
     end
 when home_menu_options[2]
     #puts rules

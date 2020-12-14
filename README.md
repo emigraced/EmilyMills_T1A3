@@ -1,67 +1,61 @@
-# Main Title/App Name 
+# The Sims: Command Line Edition
 
 Github Repository: https://github.com/emigraced/EmilyMills_T1A3
-*Note, this repo is private. Need to add Varsha & Jairo as collaborators.*
+*Note, this repo is private. Varsha & Jairo have been added as collaborators.*
 
 ## Software Development Plan (SDP)
 
 ### Purpose/Scope Statement
 
-Develop a statement of purpose and scope for your application. It must include:
-- describe at a high level what the application will do
-- identify the problem it will solve and explain why you are developing it
-- identify the target audience
-- explain how a member of the target audience will use it
+The purpose of this app is to bring a sense of nostalgia to the user by providing a limited selection of features from the popular 'The Sims' franchise. (It will be targetted towards those who are familiar with the game.)
+
+The original franchise is a simulation game where users can create heavily customisable people ('Sims') and control their lives, including their moods, aspirations, relationships, living situations, and much more. 
+
+With the use of the TTY-Prompt Gem, this Ruby terminal app will allow users to create multiple Sims and specify their name, gender, stage of life, and a trait. The user can choose a Sim to 'play', and direct them to have certain interactions with other Sims. The key interest of the game is that the outcomes to these interactions will have different probabilities depending on the selected trait (friendly or mean) of the Sim in play. 
+
+To further drive home the nostalgia, the app makes use of a few specific elements which nod to the original game: 
+- the colour green (one of the logo colours)
+- a diamond selector in the TTY prompt menus (reminiscent of the plumbob)
+- a diamond TTY spinner (reminiscent of the loading screens)
+
+This app reads and writes to a YAML database, which enables the game to be saved. When the user runs the app, their previously created Sims will be available to them. They will also have the option to wipe the database if they would like to start afresh. 
+
+An instruction book is also made easily available within the app if the user requires guidance. 
 
 ### Features
 
-Develop a list of features that will be included in the application. It must include:
-- at least THREE features
-- describe each feature
+#### Create Sims (unlimited)
+
+#### Sim Interaction (with probability)
+
+#### Save Game (autosave)
 
 ### User Interaction/Experience
 
-Develop an outline of the user interaction and experience for the application.
-Your outline must include:
-- how the user will find out how to interact with / use each feature
-- how the user will interact with / use each feature
-- how errors will be handled by the application and displayed to the user
+Upon running the app, immediately available to the user is the option to read the instructions, which display neatly formatted as a markdown file within the terminal. 
+
+The program also utilises TTY prompt to significantly limit the capacity for error by ensuring the user cannot enter an invalid response. 
 
 ### Diagram 
 
-Develop a diagram which describes the control flow of your application. Your diagram must:
-- show the workflow/logic and/or integration of the features in your application for each feature.
-- utilise a recognised format or set of conventions for a control flow diagram, such as UML.
+
 
 ### Implementation Plan 
 
-Develop an implementation plan which:
-- outlines how each feature will be implemented and a checklist of tasks for each feature
-- prioritise the implementation of different features, or checklist items within a feature
-- provide a deadline, duration or other time indicator for each feature or checklist/checklist-item
+My implementation plan can be found on my [Trello board](https://trello.com/b/TUebzU4P/term-1-terminal-project)
 
-Utilise a suitable project management platform to track this implementation plan
-(https://trello.com/b/TUebzU4P/term-1-terminal-project)
-
-> Your checklists for each feature should have at least 5 items.
 
 ### Help Documentation
 
-Design help documentation which includes a set of instructions which accurately describe how to use and install the application.
+Instructions
 
-You must include:
-- steps to install the application
-- any dependencies required by the application to operate
-- any system/hardware requirements
+#### steps to install the application
 
 
+#### any dependencies required by the application to operate
 
 
-
-
-
-
-
+#### any system/hardware requirements
 
 
 
@@ -70,7 +64,8 @@ You must include:
 
 
 #### Attribution 
-
+- The Sims Video Games from Electronic Arts
+https://www.ea.com/en-au/games/the-sims
 - Terminal Apps the Easy Way  
 https://ttytoolkit.org/
 - Are you making a CLI app? Use TTY::Prompt!  
