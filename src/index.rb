@@ -32,11 +32,34 @@ end
 return saved_sims_options
 end
 
+#finding the sim's trait for probability calculations
+def find_trait(sim)
+#open yaml file, look for the ID that matches the sim's name (which has been passed in), and look for the trait associated with that ID
+    log = File.read("../data/database.yml")
+    YAML::load_stream(log) do |doc| 
+        if sim == doc[:id][:name]
+        selected_sim_trait = doc[:id][:trait]
+    else
+        next 
+    end
+    return selected_sim_trait
+    end
+end
+
+def probability_generator(array)
+    #code
+end
+
 #variables for the menu
 home_menu_options = ["Create a Sim!", "Choose a Sim to play", "Read the instructions", "Exit"]
 gender_options = ["female", "male"]
 life_stage_options = ["baby", "child", "adult", "elder"]
 trait_options = ["friendly", "mean"]
+interaction_options = ["Become friends", "Become enemies"]
+
+#probabilities
+friendly_probability = [[00000], [00011]]  #friendly sim choosing to become friends will be 100% successful, friendly sim trying to become enemies will be 60% successful
+mean_probability = [[00011], [00000]]  #mean sim choosing to become friends will be 60% successful, mean sim trying to become enemies will be 100% successful
 
 #menu
 puts ascii_title
@@ -86,13 +109,17 @@ when home_menu_options[1]
         end
     end
     recipient_sim = prompt.select("And who would you like #{selected_sim} to interact with?", updated_sim_selections) 
-   
-
+    chosen_interation = prompt.select("How would you like #{selected_sim} to interact with #{recipient_sim}?", interaction_options)
+    find_trait(selected_sim) 
+    # if chosen_interation == interaction_options[0] && selected_sim_trait == "friendly"
+    #     probability_generator(friendly_probability)
+    # elsif chosen_interation == interaction_options[1] && selected_sim_trait == "mean"
+    #     probability_generator(mean_probability)
+    # end
 when home_menu_options[2]
     #puts rules
 end
 end
-
 
 
 #when this game is ready to be shared, you need to replace your database.yml file with a template (because you don't want other people to have your database!). Maybe a git-ignore on the yml file?
