@@ -16,3 +16,15 @@
   :gender: male
   :life_stage: adult
   :trait: friendly
+---
+:id:
+  :name: Vob
+  :gender: female
+  :life_stage: elder
+  :trait: mean
+---
+:id:
+  :name: Connor
+  :gender: male
+  :life_stage: child
+  :trait: friendly

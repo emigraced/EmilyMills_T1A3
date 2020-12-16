@@ -67,14 +67,27 @@ when home_menu_options[0]
     sleep(0.5)
     puts "Finally, give your Sim a first name:"
     input_name = gets.strip.capitalize
+    #make a way to not double up on names
     save_created_sim(input_name, input_gender, input_life_stage, input_trait)
 when home_menu_options[1]
     sim_library = YAML.load(File.read("../data/database.yml"))
     if sim_library == false
         puts pastel.bright_yellow("Oops! You haven't created any Sims yet. Please make a different selection.")
     else
-    select_sim = prompt.select("Please select a Sim", read_sim_library)
+    selected_sim = prompt.select("Please select a Sim", read_sim_library)
     end
+    updated_sim_selections = read_sim_library
+    updated_sim_selections.each_with_index do |sim, index|
+        if sim == selected_sim
+            updated_sim_selections.delete_at(index)
+            updated_sim_selections.insert(index, {:name => "#{selected_sim}", :disabled => "(already selected)" })
+        else 
+            next
+        end
+    end
+    recipient_sim = prompt.select("And who would you like #{selected_sim} to interact with?", updated_sim_selections) 
+   
+
 when home_menu_options[2]
     #puts rules
 end
