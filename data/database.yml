@@ -6,37 +6,19 @@
   :trait: friendly
 ---
 :id:
-  :name: Zelder
-  :gender: male
-  :life_stage: elder
-  :trait: mean
----
-:id:
   :name: Josh
   :gender: male
   :life_stage: adult
   :trait: friendly
 ---
 :id:
-  :name: Vob
-  :gender: female
-  :life_stage: elder
-  :trait: mean
----
-:id:
-  :name: Connor
+  :name: Larry
   :gender: male
-  :life_stage: child
-  :trait: friendly
----
-:id:
-  :name: Ben
-  :gender: female
   :life_stage: baby
   :trait: mean
 ---
 :id:
-  :name: Wolverine
-  :gender: male
-  :life_stage: adult
+  :name: Louise
+  :gender: female
+  :life_stage: elder
   :trait: mean
