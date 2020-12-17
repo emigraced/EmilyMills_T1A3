@@ -120,9 +120,19 @@ when home_menu_options[1]
         if chosen_interaction == interaction_options[0] && $selected_sim_trait == "friendly" #friendly selects become friends
             puts probability_generator(friendly_probability[0])
         elsif chosen_interaction == interaction_options[1] && $selected_sim_trait == "friendly" #friendly selects become enemies
-            puts probability_generator(friendly_probability[1])
+            result = probability_generator(friendly_probability[1])
+            puts result
+            sleep(0.5)
+                if result == $outcome_options[1]
+                puts "Because #{selected_sim} is friendly, they didn't have what it takes to be mean this time. #{selected_sim} and #{recipient_sim} are now friends :)"
+                end
         elsif chosen_interaction == interaction_options[0] && $selected_sim_trait == "mean" #mean selects become friends
-            puts probability_generator(mean_probability[0])
+            result = probability_generator(mean_probability[0])
+            puts result
+            sleep(0.5)
+                if result == $outcome_options[1]
+                puts "Because #{selected_sim} is mean, they failed to make friends this time! #{selected_sim} and #{recipient_sim} are now enemies :("
+                end
         elsif chosen_interaction == interaction_options[1] && $selected_sim_trait == "mean" #mean selects become enemies 
             puts probability_generator(mean_probability[1])
         else
