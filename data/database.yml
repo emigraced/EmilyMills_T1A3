@@ -28,3 +28,9 @@
   :gender: male
   :life_stage: child
   :trait: friendly
+---
+:id:
+  :name: Ben
+  :gender: female
+  :life_stage: baby
+  :trait: mean
