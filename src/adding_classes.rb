@@ -14,7 +14,7 @@ gender_options = ["female", "male"]
 life_stage_options = ["baby", "child", "adult", "elder"]
 trait_options = ["friendly", "mean"]
 interaction_options = ["Become friends", "Become enemies"]
-$outcome_options = ["Success!", "Uh oh..."]
+@outcome_options = ["Success!", "Uh oh..."]
 
 #probabilities
 friendly_probability = [[0, 0, 0, 0, 0], [0, 0, 0, 1, 1]]  #friendly sim choosing to become friends will be 100% successful, friendly sim trying to become enemies will be 60% successful
@@ -50,11 +50,11 @@ def find_trait(sim)
     log = File.read("../data/database.yml")
     YAML::load_stream(log) do |doc| 
             if sim == doc[:id][:name]
-            $selected_sim_trait = doc[:id][:trait]
+            selected_sim_trait = doc[:id][:trait]
             else
                 next 
             end
-        return $selected_sim_trait
+        return selected_sim_trait
     end
 end
 
@@ -62,7 +62,7 @@ end
 def probability_generator(array)
     rand_num = rand(5)
     rand_index_generation = array[rand_num]
-    outcome = $outcome_options[rand_index_generation]
+    outcome = @outcome_options[rand_index_generation]
     return outcome
 end
 
@@ -115,19 +115,17 @@ when home_menu_options[1]
         end
     end
     recipient_sim = prompt.select("And who would you like #{selected_sim} to interact with?", updated_sim_selections) 
-    chosen_interaction = prompt.select("How would you like #{selected_sim} to interact with #{recipient_sim}?", interaction_options)
+    chosen_interation = prompt.select("How would you like #{selected_sim} to interact with #{recipient_sim}?", interaction_options)
     find_trait(selected_sim) 
-        if chosen_interaction == interaction_options[0] && $selected_sim_trait == "friendly" #friendly selects become friends
-            puts probability_generator(friendly_probability[0])
-        elsif chosen_interaction == interaction_options[1] && $selected_sim_trait == "friendly" #friendly selects become enemies
-            puts probability_generator(friendly_probability[1])
-        elsif chosen_interaction == interaction_options[0] && $selected_sim_trait == "mean" #mean selects become friends
-            puts probability_generator(mean_probability[0])
-        elsif chosen_interaction == interaction_options[1] && $selected_sim_trait == "mean" #mean selects become enemies 
-            puts probability_generator(mean_probability[1])
-        else
-            puts "Oh dear, we've run into a problem with the app. Please contact the creator."
-        end
+    if chosen_interation == interaction_options[0] && @selected_sim_trait == "friendly" #friendly selects become friends
+        puts probability_generator(friendly_probability[0])
+    elsif chosen_interation == interaction_options[1] && @selected_sim_trait == "friendly" #friendly selects become enemies
+        puts probability_generator(friendly_probability[1])
+    elsif chosen_interation == interaction_options[0] && @selected_sim_trait == "mean" #mean selects become friends
+        puts probability_generator(mean_probability[0])
+    elsif chosen_interation == interaction_options[1] && @selected_sim_trait == "mean" #mean selects become enemies 
+        puts probability_generator(mean_probability[1])
+    end
     sleep(1)
 when home_menu_options[2]
     #puts rules

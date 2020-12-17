@@ -34,3 +34,9 @@
   :gender: female
   :life_stage: baby
   :trait: mean
+---
+:id:
+  :name: Wolverine
+  :gender: male
+  :life_stage: adult
+  :trait: mean
