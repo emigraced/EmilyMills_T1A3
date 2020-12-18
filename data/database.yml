@@ -12,13 +12,7 @@
   :trait: friendly
 ---
 :id:
-  :name: Larry
+  :name: Ben
   :gender: male
-  :life_stage: baby
-  :trait: mean
----
-:id:
-  :name: Louise
-  :gender: female
-  :life_stage: elder
+  :life_stage: child
   :trait: mean

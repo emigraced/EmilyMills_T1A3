@@ -3,12 +3,86 @@ require "yaml"
 require "tty-prompt"
 require "tty-color"
 require "pastel"
-require "tty-spinner"
-require "./methods.rb"
 
 #tty inits
 prompt = TTY::Prompt.new(symbols: {marker: "♦"}, active_color: :cyan)
 pastel = Pastel.new
+
+#ascii "The Sims" title
+def ascii_title
+  File.readlines("../docs/ascii_title.txt") do |line|
+    puts line
+  end
+end
+
+#saving created sims to the database file
+def save_created_sim(name, gender, life_stage, trait)
+    sim_id = {:id => {:name => name, :gender => gender, :life_stage => life_stage, :trait => trait}}
+    File.open("../data/database.yml", "a+") { |doc| doc.write(sim_id.to_yaml) }
+    puts "Hooray, you've successfully created #{name}!"
+end
+
+#(NOT YET CORRECTLY IMPLEMENTED) ensuring no name double ups for sims by checking the sim library 
+def does_name_exist(name)
+    log = File.read("../data/database.yml")
+    name_validation = false
+    YAML::load_stream(log) do |doc| 
+        next if name != doc[:id][:name]
+            name_validation = true 
+            return name_validation
+        end
+end
+
+#selecting from saved sims
+def read_sim_library
+    log = File.read("../data/database.yml")
+    saved_sims_options = []
+    YAML::load_stream(log) do |doc| 
+        saved_sims_options << "#{doc[:id][:name]}"
+    end
+return saved_sims_options
+end
+
+#(NOT YET WORKING) deleting sims
+# def delete_sim(sim)
+#     log = File.open("../data/database.yml")
+#     YAML::load_stream(log) do |doc| 
+#         next unless sim == doc[:id][:name]
+#             delete.(doc)
+#             puts "You've successfully deleted #{sim}"
+#         else
+#             puts "Error"
+#             break
+#         end
+#     end
+#end
+
+#finding the sim's trait for probability calculations
+def find_trait(sim)
+    log = File.read("../data/database.yml")
+    YAML::load_stream(log) do |doc| 
+            if sim == doc[:id][:name]
+            $selected_sim_trait = doc[:id][:trait]
+            else
+                next 
+            end
+        return $selected_sim_trait
+    end
+end
+
+#randomise interaction response
+def probability_generator(array)
+    rand_num = rand(5)
+    rand_index_generation = array[rand_num]
+    outcome = $outcome_options[rand_index_generation]
+    return outcome
+end
+
+#IN PROGRESS
+def save_interactions(interaction_outcome, initiating_sim, receiving_sim)
+    occured_interactions = []
+    occured_interactions << interaction_outcome #wrong. this is going to put "Success!" or "Uh oh..." in the array
+end
 
 #arrays for the menu options
 home_menu_options = ["Create a Sim!", "Choose a Sim to play", "Delete Sims", "Read the instructions", "Exit"]
@@ -23,6 +97,7 @@ friendly_probability = [[0, 0, 0, 0, 0], [0, 0, 0, 1, 1]] #friendly sim choosing
 mean_probability = [[0, 0, 0, 1, 1], [0, 0, 0, 0, 0]] #mean sim choosing to become friends will be 60% successful, mean sim trying to become enemies will be 100% successful
 
 #menu
+puts pastel.cyan("Created by Emily Mills © 2020")
 puts ascii_title
 puts "Welcome to The Sims: Command Line Edition!"
 sleep(0.5)
@@ -50,13 +125,13 @@ when home_menu_options[0] #create a sim
     sleep(0.5)
     puts "Finally, give your Sim a first name:"
     input_name = gets.strip.capitalize
-    # name_check = does_name_exist(input_name)
-    # if name_check == false
-    save_created_sim(input_name, input_gender, input_life_stage, input_trait)
-    # else
-    #     puts "You have already saved a Sim with that name! Please try again with a different name, or delete the original Sim."
-    # end
-    # #need to loop back and allow user to enter a different name
+    name_created = does_name_exist(input_name)
+    if name_created == true 
+        puts pastel.bright_yellow("You have already saved a Sim with that name! Please try again with a different name, or delete the original Sim.")
+    else name_created == false
+        save_created_sim(input_name, input_gender, input_life_stage, input_trait)
+    end
+    #need to loop back and allow user to enter a different name
     
     sleep(1)
 when home_menu_options[1] #choose a sim to play
@@ -102,13 +177,13 @@ when home_menu_options[1] #choose a sim to play
         elsif chosen_interaction == interaction_options[1] && $selected_sim_trait == "mean" #mean selects become enemies 
             result = probability_generator(mean_probability[1])
             puts result
-            if result == $outcome_options[0]
-                save_interactions(enemies, selected_sim, recipient_sim)
-            elsif result == $outcome_options[1]
-                save_interactions(friends, selected_sim, recipient_sim)
-            else
-                puts "Error"
-            end
+            # if result == $outcome_options[0]
+            #     save_interactions(enemies, selected_sim, recipient_sim)
+            # elsif result == $outcome_options[1]
+            #     save_interactions(friends, selected_sim, recipient_sim)
+            # else
+            #     puts "Error"
+            # end
         else
             puts "Oh dear, we've run into a problem with the app. Please contact the creator."
         end
