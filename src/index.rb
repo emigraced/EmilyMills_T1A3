@@ -124,14 +124,17 @@ when home_menu_options[0] #create a sim
     end
     sleep(0.5)
     puts "Finally, give your Sim a first name:"
-    input_name = gets.strip.capitalize
-    name_created = does_name_exist(input_name)
-    if name_created == true 
-        puts pastel.bright_yellow("You have already saved a Sim with that name! Please try again with a different name, or delete the original Sim.")
-    else name_created == false
-        save_created_sim(input_name, input_gender, input_life_stage, input_trait)
+    can_continue = nil
+    until can_continue == true
+        input_name = gets.strip.capitalize
+        name_created = does_name_exist(input_name)
+        if name_created == true 
+            puts pastel.bright_yellow("You have already saved a Sim with that name! Please try again with a different name.")
+        else name_created == false
+            can_continue = true
+            save_created_sim(input_name, input_gender, input_life_stage, input_trait)
+        end
     end
-    #need to loop back and allow user to enter a different name
     
     sleep(1)
 when home_menu_options[1] #choose a sim to play
