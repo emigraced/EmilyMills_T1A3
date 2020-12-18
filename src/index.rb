@@ -15,14 +15,7 @@ def ascii_title
   end
 end
 
-#saving created sims to the database file
-def save_created_sim(name, gender, life_stage, trait)
-    sim_id = {:id => {:name => name, :gender => gender, :life_stage => life_stage, :trait => trait}}
-    File.open("../data/database.yml", "a+") { |doc| doc.write(sim_id.to_yaml) }
-    puts "Hooray, you've successfully created #{name}!"
-end
-
-#(NOT YET CORRECTLY IMPLEMENTED) ensuring no name double ups for sims by checking the sim library 
+#prevents Sim name double ups by checking the Sim library 
 def does_name_exist(name)
     log = File.read("../data/database.yml")
     name_validation = false
@@ -33,7 +26,14 @@ def does_name_exist(name)
         end
 end
 
-#selecting from saved sims
+#saving created Sims to the database 
+def save_created_sim(name, gender, life_stage, trait)
+    sim_id = {:id => {:name => name, :gender => gender, :life_stage => life_stage, :trait => trait}}
+    File.open("../data/database.yml", "a+") { |doc| doc.write(sim_id.to_yaml) }
+    puts "Hooray, you've successfully created #{name}!"
+end
+
+#selecting from saved Sims
 def read_sim_library
     log = File.read("../data/database.yml")
     saved_sims_options = []
@@ -42,20 +42,6 @@ def read_sim_library
     end
 return saved_sims_options
 end
-
-#(NOT YET WORKING) deleting sims
-# def delete_sim(sim)
-#     log = File.open("../data/database.yml")
-#     YAML::load_stream(log) do |doc| 
-#         next unless sim == doc[:id][:name]
-#             delete.(doc)
-#             puts "You've successfully deleted #{sim}"
-#         else
-#             puts "Error"
-#             break
-#         end
-#     end
-#end
 
 #finding the sim's trait for probability calculations
 def find_trait(sim)
@@ -78,10 +64,28 @@ def probability_generator(array)
     return outcome
 end
 
-#IN PROGRESS
+#IN PROGRESS method to save completed Sim interactions
 def save_interactions(interaction_outcome, initiating_sim, receiving_sim)
     occured_interactions = []
     occured_interactions << interaction_outcome #wrong. this is going to put "Success!" or "Uh oh..." in the array
+end
+
+#(NOT YET WORKING) deleting sims
+def delete_sim(sim)
+    database = File.open("../data/database.yml")
+    updated_database = {}
+    YAML::load_stream(database) do |doc| 
+        next if sim == doc[:id][:name]
+            updated_database.merge!({:id => doc[:id]})
+            File.open("../data/database.yml", "w") do |old_doc| 
+                old_doc.write("") 
+            end
+            #looks like it's not appending because of the above overwrite (might be stopping the below append?) but i need this to clear the file first
+            File.open("../data/database.yml", "a+") do |new_doc| 
+                new_doc.write(updated_database.to_yaml) 
+            end
+        end
+    puts "You've successfully deleted #{sim}"
 end
 
 #arrays for the menu options
@@ -196,8 +200,13 @@ when home_menu_options[2] #delete sims
     if sim_library_status == []
     puts pastel.bright_yellow("Create some Sims first, and then you can come back here if you'd like to delete them.")
     else
-    sim_to_delete = prompt.select("Which Sim would you like to delete? (Be careful! This action cannot be undone.)", read_sim_library) 
-    #delete_sim(sim_to_delete)
+    sim_library_status << ["Cancel and go back"]
+    sim_to_delete = prompt.select("Which Sim would you like to delete? (Be careful! This action cannot be undone.)", sim_library_status) 
+        if sim_to_delete == "Cancel and go back"
+            next
+        else
+            delete_sim(sim_to_delete)
+        end
     end
     sleep(1)
 when home_menu_options[3] #read the instructions
@@ -206,7 +215,4 @@ when home_menu_options[3] #read the instructions
 end
 end
 
-
-#when this game is ready to be shared, you need to replace your database.yml file with a template (because you don't want other people to have your database!). Maybe a git-ignore on the yml file?
-#add option for erasing saved file and starting again? Maybe this could be a command line argument that wipes the yaml file
 

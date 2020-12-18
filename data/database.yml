@@ -1,0 +1,18 @@
+---
+:id:
+  :name: Josh #test
+  :gender: male
+  :life_stage: adult
+  :trait: friendly
+---
+:id:
+  :name: Emily #test
+  :gender: female
+  :life_stage: adult
+  :trait: friendly
+---
+:id:
+  :name: Benjamin #test
+  :gender: male
+  :life_stage: child
+  :trait: mean
