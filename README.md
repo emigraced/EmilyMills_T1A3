@@ -1,7 +1,7 @@
 # The Sims: Command Line Edition
 
 Github Repository: https://github.com/emigraced/EmilyMills_T1A3
-*Note, this repo is private. Varsha & Jairo have been added as collaborators.*
+*Varsha & Jairo have been added as collaborators.*
 
 ## Software Development Plan (SDP)
 

@@ -16,3 +16,9 @@
   :gender: male
   :life_stage: child
   :trait: mean
+---
+:id:
+  :name: Helen
+  :gender: female
+  :life_stage: child
+  :trait: friendly

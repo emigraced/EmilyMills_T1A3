@@ -78,10 +78,10 @@ def delete_sim(sim)
     YAML::load_stream(File.open("../data/database.yml", "r+")) do |doc| 
         next if sim == doc[:id][:name]
             updated_database.merge!({:id => doc[:id]})
-            puts updated_database #displays the correct data
+            #puts updated_database #displays the correct data
 
     end
-    puts updated_database #displays INCORRECT data. only shows the last sim
+    #puts updated_database #displays INCORRECT data. only shows the last sim
     
     #File.write("../data/database.yml", updated_database)
     # puts "You've successfully deleted #{sim}"
