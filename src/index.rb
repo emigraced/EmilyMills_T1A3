@@ -72,19 +72,15 @@ def save_interactions(interaction_outcome, initiating_sim, receiving_sim)
     occured_interactions << interaction_outcome #wrong. this is going to put "Success!" or "Uh oh..." in the array
 end
 
-#(NOT YET WORKING) deleting sims
+#deleting sims
 def delete_sim(sim)
-    updated_database = {}
+    updated_database = []
     YAML::load_stream(File.open("../data/database.yml", "r+")) do |doc| 
         next if sim == doc[:id][:name]
-            updated_database.merge!({:id => doc[:id]})
-            #puts updated_database #displays the correct data
-
+            updated_database << {:id => doc[:id]}
     end
-    #puts updated_database #displays INCORRECT data. only shows the last sim
-    
-    #File.write("../data/database.yml", updated_database)
-    # puts "You've successfully deleted #{sim}"
+    File.write("../data/database.yml", updated_database)
+    puts "You've successfully deleted #{sim}"
 end
 
 #arrays for the menu options
