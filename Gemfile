@@ -8,10 +8,12 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem "rspec", "~> 3.10"
 
-gem "tty", "~> 0.5.0"
-
 gem "tty-spinner", "~> 0.2.0"
 
-gem "pastel", "~> 0.6.1"
+gem "tty-prompt", "~> 0.23.0"
 
-gem 'tty-markdown'
+gem "tty-markdown", "~> 0.7.0"
+
+gem "tty-color", "~> 0.6.0"
+
+gem "pastel", "~> 0.8.0"

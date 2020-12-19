@@ -19,9 +19,9 @@ end
 
 #prevents Sim name double ups by checking the Sim library 
 def does_name_exist(name)
-    log = File.read("../data/database.yml")
+    database = File.read("../data/database.yml")
     name_validation = false
-    YAML::load_stream(log) do |doc| 
+    YAML::load_stream(database) do |doc| 
         next if name != doc[:id][:name]
             name_validation = true 
             return name_validation
@@ -74,12 +74,13 @@ end
 
 #deleting sims
 def delete_sim(sim)
-    updated_database = []
+    updated_database = {}
+    updated_database.to_yaml
     YAML::load_stream(File.open("../data/database.yml", "r+")) do |doc| 
         next if sim == doc[:id][:name]
-            updated_database << {:id => doc[:id]}
+            updated_database.merge!({:id => doc[:id]})
     end
-    File.write("../data/database.yml", updated_database)
+    File.write("../data/database.yml", updated_database.to_yaml)
     puts "You've successfully deleted #{sim}"
 end
 
