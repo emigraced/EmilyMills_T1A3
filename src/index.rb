@@ -1,5 +1,6 @@
 #required
 require "yaml"
+require "psych"
 require "tty-prompt"
 require "tty-color"
 require "pastel"
@@ -22,7 +23,7 @@ def does_name_exist(name)
     database = File.read("../data/database.yml")
     name_validation = false
     YAML::load_stream(database) do |doc| 
-        next if name != doc[:id][:name]
+        next if name != doc[[:id][:name]]
             name_validation = true 
             return name_validation
         end
@@ -30,7 +31,8 @@ end
 
 #saving created Sims to the database 
 def save_created_sim(name, gender, life_stage, trait)
-    sim_id = {:id => {:name => name, :gender => gender, :life_stage => life_stage, :trait => trait}}
+    sim_id = []
+    sim_id << {:id => {:name => name, :gender => gender, :life_stage => life_stage, :trait => trait}}
     File.open("../data/database.yml", "a+") { |doc| doc.write(sim_id.to_yaml) }
     puts "Hooray, you've successfully created #{name}!"
 end
@@ -40,7 +42,7 @@ def read_sim_library
     log = File.read("../data/database.yml")
     saved_sims_options = []
     YAML::load_stream(log) do |doc| 
-        saved_sims_options << "#{doc[:id][:name]}"
+        saved_sims_options << doc[:id][:name]
     end
 return saved_sims_options
 end
@@ -74,13 +76,12 @@ end
 
 #deleting sims
 def delete_sim(sim)
-    updated_database = {}
-    updated_database.to_yaml
-    YAML::load_stream(File.open("../data/database.yml", "r+")) do |doc| 
+    updated_database = []
+    YAML::load_stream(File.open("../data/database.yml", "a+")) do |doc| 
         next if sim == doc[:id][:name]
-            updated_database.merge!({:id => doc[:id]})
+        updated_database << {:id => doc[:id]}
     end
-    File.write("../data/database.yml", updated_database.to_yaml)
+    YAML::dump_stream(updated_database)
     puts "You've successfully deleted #{sim}"
 end
 
@@ -128,8 +129,8 @@ when home_menu_options[0] #create a sim
     until can_continue == true
         input_name = gets.strip.capitalize
         name_created = does_name_exist(input_name)
-        if name_created == true 
-            puts pastel.bright_yellow("You have already saved a Sim with that name! Please try again with a different name.")
+        if name_created == true || input_name.length == 0
+            puts pastel.bright_yellow("Oops! That's invalid. Please try again with a different name. (Sim names need to be unique!)")
         else name_created == false
             can_continue = true
             save_created_sim(input_name, input_gender, input_life_stage, input_trait)
