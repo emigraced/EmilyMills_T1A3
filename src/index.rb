@@ -3,10 +3,12 @@ require "yaml"
 require "tty-prompt"
 require "tty-color"
 require "pastel"
+require "tty-markdown"
 
 #tty inits
 prompt = TTY::Prompt.new(symbols: {marker: "♦"}, active_color: :cyan)
 pastel = Pastel.new
+parsed = TTY::Markdown.parse_file("../docs/gameplay_instructions.md")
 
 #ascii "The Sims" title
 def ascii_title
@@ -72,20 +74,17 @@ end
 
 #(NOT YET WORKING) deleting sims
 def delete_sim(sim)
-    database = File.open("../data/database.yml")
     updated_database = {}
-    YAML::load_stream(database) do |doc| 
+    YAML::load_stream(File.open("../data/database.yml", "r+")) do |doc| 
         next if sim == doc[:id][:name]
             updated_database.merge!({:id => doc[:id]})
-            File.open("../data/database.yml", "w") do |old_doc| 
-                old_doc.write("") 
-            end
-            #looks like it's not appending because of the above overwrite (might be stopping the below append?) but i need this to clear the file first
-            File.open("../data/database.yml", "a+") do |new_doc| 
-                new_doc.write(updated_database.to_yaml) 
-            end
-        end
-    puts "You've successfully deleted #{sim}"
+            puts updated_database #displays the correct data
+
+    end
+    puts updated_database #displays INCORRECT data. only shows the last sim
+    
+    #File.write("../data/database.yml", updated_database)
+    # puts "You've successfully deleted #{sim}"
 end
 
 #arrays for the menu options
@@ -210,7 +209,7 @@ when home_menu_options[2] #delete sims
     end
     sleep(1)
 when home_menu_options[3] #read the instructions
-    #code
+    puts parsed
     sleep(1)
 end
 end

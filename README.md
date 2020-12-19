@@ -44,6 +44,7 @@ The program also utilises TTY prompt to significantly limit the capacity for err
 
 My implementation plan can be found on my [Trello board](https://trello.com/b/TUebzU4P/term-1-terminal-project)
 
+talk about how you have not used rescues/exeptions because you have successfully handled user response to avoid the need for this
 
 ### Help Documentation
 

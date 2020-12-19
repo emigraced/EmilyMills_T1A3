@@ -10,6 +10,8 @@ gem "rspec", "~> 3.10"
 
 gem "tty", "~> 0.5.0"
 
+gem "tty-spinner", "~> 0.2.0"
+
 gem "pastel", "~> 0.6.1"
 
-gem "tty-spinner", "~> 0.2.0"
+gem 'tty-markdown'
