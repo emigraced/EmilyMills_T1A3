@@ -1,6 +1,5 @@
 #required
 require "yaml"
-require "psych"
 require "tty-prompt"
 require "tty-color"
 require "pastel"
@@ -23,7 +22,7 @@ def does_name_exist(name)
     database = File.read("../data/database.yml")
     name_validation = false
     YAML::load_stream(database) do |doc| 
-        next if name != doc[[:id][:name]]
+        next if name != doc[:id][:name]
             name_validation = true 
             return name_validation
         end
@@ -31,8 +30,7 @@ end
 
 #saving created Sims to the database 
 def save_created_sim(name, gender, life_stage, trait)
-    sim_id = []
-    sim_id << {:id => {:name => name, :gender => gender, :life_stage => life_stage, :trait => trait}}
+    sim_id = {:id => {:name => name, :gender => gender, :life_stage => life_stage, :trait => trait}}
     File.open("../data/database.yml", "a+") { |doc| doc.write(sim_id.to_yaml) }
     puts "Hooray, you've successfully created #{name}!"
 end
@@ -68,25 +66,17 @@ def probability_generator(array)
     return outcome
 end
 
-#IN PROGRESS method to save completed Sim interactions
+#save completed Sim interactions
 def save_interactions(interaction_outcome, initiating_sim, receiving_sim)
-    occured_interactions = []
-    occured_interactions << interaction_outcome #wrong. this is going to put "Success!" or "Uh oh..." in the array
-end
-
-#deleting sims
-def delete_sim(sim)
-    updated_database = []
-    YAML::load_stream(File.open("../data/database.yml", "a+")) do |doc| 
-        next if sim == doc[:id][:name]
-        updated_database << {:id => doc[:id]}
+    if interaction_outcome.include?("are now enemies")
+        #code
+    elsif interaction_outcome.include?("are now friends")
+        #code
     end
-    YAML::dump_stream(updated_database)
-    puts "You've successfully deleted #{sim}"
 end
 
 #arrays for the menu options
-home_menu_options = ["Create a Sim!", "Choose a Sim to play", "Delete Sims", "Read the instructions", "Exit"]
+home_menu_options = ["Create a Sim!", "Choose a Sim to play", "View Relationships", "Read the instructions", "Exit"]
 gender_options = ["female", "male"]
 life_stage_options = ["baby", "child", "adult", "elder"]
 trait_options = ["friendly", "mean"]
@@ -94,8 +84,10 @@ interaction_options = ["Become friends", "Become enemies"]
 $outcome_options = ["Success!", "Uh oh..."]
 
 #probabilities
-friendly_probability = [[0, 0, 0, 0, 0], [0, 0, 0, 1, 1]] #friendly sim choosing to become friends will be 100% successful, friendly sim trying to become enemies will be 60% successful
-mean_probability = [[0, 0, 0, 1, 1], [0, 0, 0, 0, 0]] #mean sim choosing to become friends will be 60% successful, mean sim trying to become enemies will be 100% successful
+friendly_probability = [[0, 0, 0, 0, 0], [0, 0, 0, 1, 1]] 
+#friendly sim choosing to become friends will be 100% successful, friendly sim trying to become enemies will be 60% successful
+mean_probability = [[0, 0, 0, 1, 1], [0, 0, 0, 0, 0]] 
+#mean sim choosing to become friends will be 60% successful, mean sim trying to become enemies will be 100% successful
 
 #menu
 puts pastel.cyan("Created by Emily Mills © 2020")
@@ -135,8 +127,7 @@ when home_menu_options[0] #create a sim
             can_continue = true
             save_created_sim(input_name, input_gender, input_life_stage, input_trait)
         end
-    end
-    
+    end 
     sleep(1)
 when home_menu_options[1] #choose a sim to play
     sim_library = YAML.load(File.read("../data/database.yml"))
@@ -161,52 +152,47 @@ when home_menu_options[1] #choose a sim to play
         if chosen_interaction == interaction_options[0] && $selected_sim_trait == "friendly" #friendly selects become friends
             result = probability_generator(friendly_probability[0])
             puts result
-            save_interactions(result, selected_sim, recipient_sim)
+            outcome = "#{selected_sim} and #{recipient_sim} are now friends :)"
+            puts pastel.bright_magenta(outcome)
+            save_interactions(outcome, selected_sim, recipient_sim)
         elsif chosen_interaction == interaction_options[1] && $selected_sim_trait == "friendly" #friendly selects become enemies
             result = probability_generator(friendly_probability[1])
             puts result
-            save_interactions(result, selected_sim, recipient_sim)
             sleep(0.5)
                 if result == $outcome_options[1]
-                puts "Because #{selected_sim} is friendly, they didn't have what it takes to be mean this time. #{selected_sim} and #{recipient_sim} are now friends :)"
+                outcome = "Because #{selected_sim} is friendly, they didn't have what it takes to be mean this time. #{selected_sim} and #{recipient_sim} are now friends :)"
+                puts pastel.bright_magenta(outcome)
+                save_interactions(outcome, selected_sim, recipient_sim)
+                elsif result == $outcome_options[0]
+                outcome = "#{selected_sim} and #{recipient_sim} are now enemies >:D"
+                puts pastel.bright_red(outcome)
+                save_interactions(outcome, selected_sim, recipient_sim) 
                 end
         elsif chosen_interaction == interaction_options[0] && $selected_sim_trait == "mean" #mean selects become friends
             result = probability_generator(mean_probability[0])
             puts result
-            save_interactions(result, selected_sim, recipient_sim)
             sleep(0.5)
                 if result == $outcome_options[1]
-                puts "Because #{selected_sim} is mean, they failed to make friends this time! #{selected_sim} and #{recipient_sim} are now enemies :("
+                outcome = "Because #{selected_sim} is mean, they failed to make friends this time! #{selected_sim} and #{recipient_sim} are now enemies :("
+                puts pastel.bright_red(outcome)
+                save_interactions(outcome, selected_sim, recipient_sim)
+                elsif result == $outcome_options[0]
+                outcome = "#{selected_sim} and #{recipient_sim} are now friends!"
+                puts pastel.bright_magenta(outcome)
+                save_interactions(outcome, selected_sim, recipient_sim)
                 end
         elsif chosen_interaction == interaction_options[1] && $selected_sim_trait == "mean" #mean selects become enemies 
             result = probability_generator(mean_probability[1])
             puts result
-            # if result == $outcome_options[0]
-            #     save_interactions(enemies, selected_sim, recipient_sim)
-            # elsif result == $outcome_options[1]
-            #     save_interactions(friends, selected_sim, recipient_sim)
-            # else
-            #     puts "Error"
-            # end
-        else
-            puts "Oh dear, we've run into a problem with the app. Please contact the creator."
+            outcome = "#{selected_sim} and #{recipient_sim} are now enemies >:D"
+            puts pastel.bright_red(outcome)
+            save_interactions(outcome, selected_sim, recipient_sim)
         end
     sleep(1)
-when home_menu_options[2] #delete sims
-    sim_library_status = read_sim_library
-    if sim_library_status == []
-    puts pastel.bright_yellow("Create some Sims first, and then you can come back here if you'd like to delete them.")
-    else
-    sim_library_status << ["Cancel and go back"]
-    sim_to_delete = prompt.select("Which Sim would you like to delete? (Be careful! This action cannot be undone.)", sim_library_status) 
-        if sim_to_delete == "Cancel and go back"
-            next
-        else
-            delete_sim(sim_to_delete)
-        end
-    end
+when home_menu_options[2] #view relationships
+    #code
     sleep(1)
-when home_menu_options[3] #read the instructions
+when home_menu_options[3] #instructions
     puts parsed
     sleep(1)
 end

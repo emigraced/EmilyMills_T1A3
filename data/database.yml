@@ -1,18 +1,18 @@
 ---
-- :id:
-    :name: Billie
-    :gender: male
-    :life_stage: adult
-    :trait: mean
+:id:
+  :name: Bobbie
+  :gender: male
+  :life_stage: child
+  :trait: mean
 ---
-- :id:
-    :name: Joy
-    :gender: female
-    :life_stage: baby
-    :trait: friendly
+:id:
+  :name: Ruby
+  :gender: female
+  :life_stage: adult
+  :trait: friendly
 ---
-- :id:
-    :name: Tom
-    :gender: male
-    :life_stage: elder
-    :trait: friendly
+:id:
+  :name: Rosie
+  :gender: female
+  :life_stage: baby
+  :trait: friendly
