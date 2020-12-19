@@ -8,8 +8,6 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem "rspec", "~> 3.10"
 
-gem "tty-spinner", "~> 0.2.0"
-
 gem "tty-prompt", "~> 0.23.0"
 
 gem "tty-markdown", "~> 0.7.0"
@@ -17,3 +15,5 @@ gem "tty-markdown", "~> 0.7.0"
 gem "tty-color", "~> 0.6.0"
 
 gem "pastel", "~> 0.8.0"
+
+gem 'rubocop', require: false
