@@ -12,7 +12,7 @@ arguments = ARGV
 # tty inits
 prompt = TTY::Prompt.new(symbols: { marker: '♦' }, active_color: :cyan)
 pastel = Pastel.new
-parsed = TTY::Markdown.parse_file('../docs/gameplay_instructions.md')
+parsed = TTY::Markdown.parse_file('./resources/gameplay_instructions.md')
 $friends_row = []
 $enemies_row = []
 table = TTY::Table.new do |t|
@@ -22,14 +22,14 @@ end
 
 # ascii "The Sims" title
 def ascii_title
-  File.readlines('../docs/ascii_title.txt') do |line|
+  File.readlines('./resources/ascii_title.txt') do |line|
     puts line
   end
 end
 
 # prevents Sim name double ups by checking the Sim library
 def does_name_exist(name)
-  database = File.read('../data/database.yml')
+  database = File.read('./data/database.yml')
   name_validation = false
   YAML.load_stream(database) do |doc|
     next if name != doc[:id][:name]
@@ -42,13 +42,13 @@ end
 # saving created Sims to the database
 def save_created_sim(name, gender, life_stage, trait)
   sim_id = { id: { name: name, gender: gender, life_stage: life_stage, trait: trait } }
-  File.open('../data/database.yml', 'a+') { |doc| doc.write(sim_id.to_yaml) }
+  File.open('./data/database.yml', 'a+') { |doc| doc.write(sim_id.to_yaml) }
   puts "Hooray, you've successfully created #{name}!"
 end
 
 # selecting from saved Sims
 def read_sim_library
-  log = File.read('../data/database.yml')
+  log = File.read('./data/database.yml')
   saved_sims_options = []
   YAML.load_stream(log) do |doc|
     saved_sims_options << doc[:id][:name]
@@ -58,7 +58,7 @@ end
 
 # finding the sim's trait for probability calculations
 def find_trait(sim)
-  log = File.read('../data/database.yml')
+  log = File.read('./data/database.yml')
   YAML.load_stream(log) do |doc|
     if sim == doc[:id][:name]
       $selected_sim_trait = doc[:id][:trait]
@@ -76,7 +76,7 @@ def probability_generator(array)
   $outcome_options[rand_index_generation]
 end
 
-# send completed Sim interactions to table
+# send completed Sim interactions to summary table
 def save_interactions(interaction_outcome, initiating_sim, receiving_sim)
   if interaction_outcome.include?('are now friends')
     table_row = "#{initiating_sim} & #{receiving_sim}"
@@ -108,7 +108,7 @@ unless arguments.length == 0
   puts "Hi, #{arguments[0].capitalize}!"
 end
 if arguments[1] == "erase"
-  File.write('../data/database.yml', '')
+  File.write('./data/database.yml', '')
 end
 puts 'Welcome to The Sims: Command Line Edition!'
 sleep(0.5)
@@ -149,7 +149,7 @@ until user_selection == home_menu_options[-1]
     end
     sleep(1)
   when home_menu_options[1] # choose a sim to play
-    sim_library = YAML.load(File.read('../data/database.yml'))
+    sim_library = YAML.load(File.read('./data/database.yml'))
     if sim_library == false || read_sim_library.size < 2
       puts pastel.bright_yellow('Oops! You need to create at least two Sims first. Please make a different selection.')
       next

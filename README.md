@@ -3,6 +3,8 @@
 Github Repository: https://github.com/emigraced/EmilyMills_T1A3  
 *Note, this repo is private. Varsha & Jairo have been added as collaborators.*
 
+![github repo screenshot](docs/github-repo-screenshot.png)
+
 Guide: 
 - [Purpose Statement](#Purpose-Statement)
 - [Key Features](#Key-Features)
@@ -75,6 +77,8 @@ In the event of users trying to use certain features in the wrong order (ie, try
 ## Implementation Plan 
 
 I utilised a Trello board to outline my tasks and manage my time. You can [access it here](https://trello.com/b/TUebzU4P/term-1-terminal-project).
+
+![trello screenshot](docs/trello-screenshot.png)
 
 ### Order of Priority
 
