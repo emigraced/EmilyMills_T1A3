@@ -1,18 +1,12 @@
 ---
 :id:
-  :name: Judah
+  :name: Tommy
   :gender: male
   :life_stage: child
+  :trait: friendly
+---
+:id:
+  :name: Barb
+  :gender: female
+  :life_stage: elder
   :trait: mean
----
-:id:
-  :name: Rebekah
-  :gender: female
-  :life_stage: child
-  :trait: friendly
----
-:id:
-  :name: Julie
-  :gender: female
-  :life_stage: baby
-  :trait: friendly

@@ -200,12 +200,12 @@ until user_selection == home_menu_options[-1]
     end
     sleep(1)
   when home_menu_options[2] # view relationships
-    # if friends_row.size < 1 || enemies_row.size < 1 
-    #   puts pastel.bright_yellow('Oops! Your Sims need to start interacting before they can build relationships! Please make a different selection.')
-    #   next
-    # else
-    puts table.render(:unicode)
-    # end
+    if $friends_row.size < 1 && $enemies_row.size < 1 
+      puts pastel.bright_yellow('Oops! Your Sims need to start interacting before they can build relationships! Please make a different selection.')
+      next
+    else
+      puts table.render(:unicode)
+    end
     sleep(1)
   when home_menu_options[3] # instructions
     puts parsed
