@@ -7,7 +7,7 @@ This command line version of the game enables players of The Sims to nostalgicly
 
 ## Create a Sim
 
-Have some fun creating your Sim(s)! Choose their gender, life stage, trait, and name. Your Sim(s) are automatically saved, so you can continue with the game! 
+Have some fun creating your Sim(s)! Choose their gender, life stage, personality trait, and name. Your Sim(s) are automatically saved, so you can continue with the game! 
 
 ## Choose a Sim to play
 
@@ -15,13 +15,15 @@ Have some fun creating your Sim(s)! Choose their gender, life stage, trait, and 
 
 First, select the Sim who will be initiating the interaction, then choose the receiving Sim. Next, choose what you would like the initiating Sim to do with the receiving Sim. Hold on to the edge of your seats, because the interaction may go sideways!
 
-## Delete Sims
+## View Relationships
 
-From a drop down menu, choose to delete any Sim from a list of Sims you have created. Be careful, because you cannot undo this! (If you accidentally enter the Delete Sims menu, arrow down to the bottom of the list to see an option to cancel and return to the main menu.)
+*At least two Sims need to have interacted before you can proceed.* 
+
+From the home menu, you can choose to view a summary of the relationships your Sims are in. This summary will update as you continue gameplay, but will be reset once you exit the game.
 
 ## Read the Instructions
 
-You're doing this right now! 
+Huzzah, you're doing this right now! 
 
 ## Exit
 
