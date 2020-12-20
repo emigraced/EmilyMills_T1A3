@@ -6,7 +6,7 @@ Guide:
 - [Purpose Statement](#Purpose-Statement)
 - [Key Features](#Key-Features)
 - [User Interaction and Experience](#User-Interaction-and-Experience)
-- [Diagram](#Diagram)
+- [Flowchart](#Flowchart)
 - [Implementation Plan](#Implementation-Plan)
 - [Help Documentation](#Help-Documentation)
 - [Sources](#Sources)
@@ -64,8 +64,11 @@ All user interaction within the app (with the exception of naming Sims) is facil
 In the event of users trying to use certain features in the wrong order (ie, trying to initiate Sim interactions without having at least two Sims created, or trying to view the relationship status table before there is information to populate it), prompts are displayed to the user in yellow text which provide clear instructions as to the reason for the error, and what to do next. This allows for the smooth resumption of gameplay.
 
 ---
-## Diagram 
+## Flowchart 
 
+![Flowchart](docs/T1A3_Flowchart.png)
+
+*This flowchart can also be accessed in the docs folder.*
 
 ---
 ## Implementation Plan 
@@ -123,11 +126,9 @@ This app requires the following Ruby Gems, all of which are noted in the Gemfile
 
 ### System/hardware Requirements
 
-This app was created and tested using Ubuntu on WSL. No guarantees can be made for the performance of the app in other environments.
+This app was created and tested using Ubuntu on WSL, with Ruby version 2.7.1. No guarantees can be made for the performance of the app in other environments.
 
 ---
-
-
 ## Sources
 - The Sims Video Games from Electronic Arts  
 https://www.ea.com/en-au/games/the-sims

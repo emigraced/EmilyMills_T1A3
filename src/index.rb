@@ -85,7 +85,7 @@ def save_interactions(interaction_outcome, initiating_sim, receiving_sim)
 end
 
 # arrays for the menu options
-home_menu_options = ['Create a Sim!', 'Choose a Sim to play', 'View Relationships', 'Read the instructions', 'Exit']
+home_menu_options = ['Create a Sim!', 'Choose a Sim to Play', 'View Relationships', 'Read the Instructions', 'Exit']
 gender_options = %w[female male]
 life_stage_options = %w[baby child adult elder]
 trait_options = %w[friendly mean]
