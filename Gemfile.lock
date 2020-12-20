@@ -2,7 +2,6 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.1)
-    diff-lcs (1.4.4)
     kramdown (2.3.0)
       rexml
     parallel (1.20.1)
@@ -14,19 +13,6 @@ GEM
     regexp_parser (2.0.0)
     rexml (3.2.4)
     rouge (3.26.0)
-    rspec (3.10.0)
-      rspec-core (~> 3.10.0)
-      rspec-expectations (~> 3.10.0)
-      rspec-mocks (~> 3.10.0)
-    rspec-core (3.10.0)
-      rspec-support (~> 3.10.0)
-    rspec-expectations (3.10.0)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.10.0)
-    rspec-mocks (3.10.0)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.10.0)
-    rspec-support (3.10.0)
     rubocop (1.6.1)
       parallel (~> 1.10)
       parser (>= 2.7.1.5)
@@ -70,16 +56,15 @@ GEM
     wisper (2.0.1)
 
 PLATFORMS
-  ruby
+  x86_64-linux
 
 DEPENDENCIES
   pastel (~> 0.8.0)
-  rspec (~> 3.10)
   rubocop
   tty-color (~> 0.6.0)
   tty-markdown (~> 0.7.0)
   tty-prompt (~> 0.23.0)
-  tty-table
+  tty-table (~> 0.12.0)
 
 BUNDLED WITH
-   2.1.4
+   2.2.2
