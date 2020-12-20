@@ -17,3 +17,5 @@ gem "tty-color", "~> 0.6.0"
 gem "pastel", "~> 0.8.0"
 
 gem 'rubocop', require: false
+
+gem 'tty-table'

@@ -4,11 +4,18 @@ require 'tty-prompt'
 require 'tty-color'
 require 'pastel'
 require 'tty-markdown'
+require 'tty-table'
 
 # tty inits
 prompt = TTY::Prompt.new(symbols: { marker: '♦' }, active_color: :cyan)
 pastel = Pastel.new
 parsed = TTY::Markdown.parse_file('../docs/gameplay_instructions.md')
+$friends_row = []
+$enemies_row = []
+table = TTY::Table.new do |t|
+  t << [pastel.bright_magenta('FRIENDS <3'), $friends_row]
+  t << [pastel.bright_red('ENEMIES </3'), $enemies_row]
+end
 
 # ascii "The Sims" title
 def ascii_title
@@ -66,12 +73,14 @@ def probability_generator(array)
   $outcome_options[rand_index_generation]
 end
 
-# save completed Sim interactions
-def save_interactions(interaction_outcome, _initiating_sim, _receiving_sim)
-  if interaction_outcome.include?('are now enemies')
-  # code
-  elsif interaction_outcome.include?('are now friends')
-    # code
+# send completed Sim interactions to table
+def save_interactions(interaction_outcome, initiating_sim, receiving_sim)
+  if interaction_outcome.include?('are now friends')
+    table_row = "#{initiating_sim} & #{receiving_sim}"
+    $friends_row << table_row
+  elsif interaction_outcome.include?('are now enemies')
+    table_row = "#{initiating_sim} & #{receiving_sim}"
+    $enemies_row << table_row
   end
 end
 
@@ -191,7 +200,12 @@ until user_selection == home_menu_options[-1]
     end
     sleep(1)
   when home_menu_options[2] # view relationships
-    # code
+    # if friends_row.size < 1 || enemies_row.size < 1 
+    #   puts pastel.bright_yellow('Oops! Your Sims need to start interacting before they can build relationships! Please make a different selection.')
+    #   next
+    # else
+    puts table.render(:unicode)
+    # end
     sleep(1)
   when home_menu_options[3] # instructions
     puts parsed

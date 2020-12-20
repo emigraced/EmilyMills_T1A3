@@ -1,18 +1,18 @@
 ---
 :id:
-  :name: Bobbie
+  :name: Judah
   :gender: male
   :life_stage: child
   :trait: mean
 ---
 :id:
-  :name: Ruby
+  :name: Rebekah
   :gender: female
-  :life_stage: adult
+  :life_stage: child
   :trait: friendly
 ---
 :id:
-  :name: Rosie
+  :name: Julie
   :gender: female
   :life_stage: baby
   :trait: friendly

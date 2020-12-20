@@ -61,6 +61,10 @@ GEM
       tty-screen (~> 0.8)
       wisper (~> 2.0)
     tty-screen (0.8.1)
+    tty-table (0.12.0)
+      pastel (~> 0.8)
+      strings (~> 0.2.0)
+      tty-screen (~> 0.8)
     unicode-display_width (1.7.0)
     unicode_utils (1.4.0)
     wisper (2.0.1)
@@ -75,6 +79,7 @@ DEPENDENCIES
   tty-color (~> 0.6.0)
   tty-markdown (~> 0.7.0)
   tty-prompt (~> 0.23.0)
+  tty-table
 
 BUNDLED WITH
    2.1.4
