@@ -1,10 +1,13 @@
-# required
+#!/usr/bin/env ruby
+
 require 'yaml'
 require 'tty-prompt'
 require 'tty-color'
 require 'pastel'
 require 'tty-markdown'
 require 'tty-table'
+
+arguments = ARGV
 
 # tty inits
 prompt = TTY::Prompt.new(symbols: { marker: '♦' }, active_color: :cyan)
@@ -101,6 +104,12 @@ mean_probability = [[0, 0, 0, 1, 1], [0, 0, 0, 0, 0]]
 # menu
 puts pastel.cyan('Created by Emily Mills © 2020')
 puts ascii_title
+unless arguments.length == 0
+  puts "Hi, #{arguments[0].capitalize}!"
+end
+if arguments[1] == "erase"
+  File.write('../data/database.yml', '')
+end
 puts 'Welcome to The Sims: Command Line Edition!'
 sleep(0.5)
 user_selection = 0

@@ -1,6 +1,7 @@
 # The Sims: Command Line Edition
 
 Github Repository: https://github.com/emigraced/EmilyMills_T1A3  
+*Note, this repo is private. Varsha & Jairo have been added as collaborators.*
 
 Guide: 
 - [Purpose Statement](#Purpose-Statement)
@@ -114,10 +115,26 @@ Below, you will find an outline of how each feature will be implemented, accompa
 
 ### Application Installation
 
+To run this app for the first time, execute the following in your command line: 
+```
+./script.sh
+```
+The Gems required to run this app will be automatically installed for you.
+
+The following are optional commands: 
+- Replace [name] with your name (ie, `./script.sh emily`), and receive a personalised greeting from the app!
+```
+./script.sh [name]
+```
+- If you find that your Sim library is getting out of hand, this command will erase the Sim library so that you can start the game afresh. 
+```
+./script.sh [name] erase
+```
+Once you have run the app for the first time on your computer you may prefer to swap out `./script.sh` for `./index.rb` for faster launch time. (You can still add on the name and erase commands if desired. This alternate method simply skips the Gem installation process when you know you've already installed them.)
 
 ### Dependancies
 
-This app requires the following Ruby Gems, all of which are noted in the Gemfile:
+This app requires the following Ruby Gems (all of which will be installed when you run `./script.sh`):
 - tty-prompt
 - tty-markdown
 - tty-color
