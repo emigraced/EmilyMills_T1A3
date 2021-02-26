@@ -7,7 +7,7 @@ This command line version of the game enables players of The Sims to nostalgicly
 
 ## Create a Sim
 
-Have some fun creating your Sim(s)! Choose their gender, life stage, personality trait, and name. Your Sim(s) are automatically saved, so you can continue with the game! 
+Have some fun creating your Sim(s)! Choose their gender, life stage, personality trait, and name. Your Sims are automatically saved, so you can continue with the game! 
 
 ## Choose a Sim to play
 

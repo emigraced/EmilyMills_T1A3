@@ -2,7 +2,7 @@
 
 Welcome! 
 
-I made a command line app based on The Sims. You can create Sims, make them interact, and record who's friends with who -- or enemies!
+I made a command line app based on The Sims. You can create Sims and make them interact -- though it might not turn out the way you expect! 
 
 Check out the instructions within the app. 
 
@@ -12,7 +12,6 @@ Emily
 
 ---
 ## Help Documentation
-
 
 ### Application Installation
 
