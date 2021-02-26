@@ -33,8 +33,7 @@ def does_name_exist(name)
   name_validation = false
   YAML.load_stream(database) do |doc|
     next if name != doc[:id][:name]
-
-    name_validation = true
+      name_validation = true
     return name_validation
   end
 end
@@ -137,7 +136,7 @@ until user_selection == home_menu_options[-1]
     puts 'Finally, give your Sim a first name:'
     can_continue = nil
     until can_continue == true
-      input_name = gets.strip.capitalize
+      input_name = STDIN.gets.strip.capitalize
       name_created = does_name_exist(input_name)
       if name_created == true || input_name.length == 0
         puts pastel.bright_yellow("Oops! That's invalid. Please try again with a different name. (Sim names need to be unique!)")

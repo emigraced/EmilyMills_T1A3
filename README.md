@@ -1,4 +1,5 @@
 # The Sims: Command Line Edition
+---
 
 Welcome! 
 
@@ -19,7 +20,7 @@ To run this app for the first time, execute the following in your command line:
 ```
 ./script.sh
 ```
-The Gems required to run this app will be automatically installed for you.
+The Gems required to run this app will be automatically installed for you. (If the script won't run, you'll need to set up execute permissions with `chmod +x script.sh`)
 
 The following are optional commands: 
 - Replace [name] with your name (ie, `./script.sh emily`), and receive a personalised greeting from the app!
@@ -44,5 +45,3 @@ This app requires the following Ruby Gems (all of which will be installed when y
 ### System/hardware Requirements
 
 This app was created and tested using Ubuntu on WSL, with Ruby version 2.7.1. No guarantees can be made for the performance of the app in other environments.
-
----
