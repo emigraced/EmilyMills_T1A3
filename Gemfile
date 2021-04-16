@@ -6,6 +6,8 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 # gem "rails"
 
+gem "kramdown", ">= 2.3.1"
+
 gem "tty-prompt", "~> 0.23.0"
 
 gem "tty-markdown", "~> 0.7.0"
