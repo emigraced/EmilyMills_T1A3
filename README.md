@@ -33,7 +33,7 @@ The following are optional commands:
 ```
 Once you have run the app for the first time on your computer you may prefer to swap out `./script.sh` for `./index.rb` for faster launch time. (You can still add on the name and erase commands if desired. This alternate method simply skips the Gem installation process when you know you've already installed them.)
 
-### Dependancies
+### Dependencies
 
 This app requires the following Ruby Gems (all of which will be installed when you run `./script.sh`):
 - tty-prompt
